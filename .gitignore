@@ -1,0 +1,101 @@
+#include<iostream>
+
+#include<stdlib.h>
+
+#include<stdio.h>
+
+#include<time.h>
+
+using namespace std;
+
+void main()
+
+{
+
+int i;
+
+int num;
+
+int fz;
+
+int fm;
+
+srand((unsigned)time(NULL));
+
+for(i=0;i<15;i++)
+
+{
+
+ 
+
+num=rand()%100+1;
+
+cout<<num<<" ";
+
+int sign;
+
+sign=rand()%3+1;
+
+if(sign==1)
+
+cout<<"+ ";
+
+if(sign==2)
+
+cout<<"- ";
+
+if(sign==3)
+
+cout<<"* ";
+
+if(sign==4)
+
+cout<<"÷? ";
+
+num=rand()%100+1;
+
+cout<<num<<"="<<endl;
+
+}
+
+for(i=0;i<15;i++)
+
+{
+
+fz=rand()%100+1;
+
+fm=rand()%100+1;
+
+cout<<fz<<"/"<<fm<<" ";
+
+int sign;
+
+sign=rand()%3+1;
+
+if(sign==1)
+
+cout<<"+ ";
+
+if(sign==2)
+
+cout<<"- ";
+
+if(sign==3)
+
+cout<<"* ";
+
+if(sign==4)
+
+cout<<"÷? ";
+
+fz=rand()%100+1;
+
+fm=rand()%100+1;
+
+cout<<fz<<"/"<<fm<<"="<<endl;
+
+}
+
+ 
+
+}
