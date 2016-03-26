@@ -1,0 +1,361 @@
+#include <iostream>
+#include<stdlib.h>
+#include<stdio.h>
+#include<time.h>
+using namespace std;
+
+int number()//控制生成题目的数量
+{
+    int n;
+    cout <<"请输入要生成题目的数量"<<endl;
+    cin>>n;
+    return n;
+
+}
+
+int multiplydivide()//控制是否有乘除法
+{
+    int i;
+    cout <<"有乘除法请按1,没有请按2"<<endl;
+    cin>>i;
+    return i;
+}
+int minus()//控制加减是否有负号
+{
+    int i;
+    //srand((unsigned)time(NULL));
+    //i=rand()%1+1;
+    cout <<"加减有负号请按1,没有请按2"<<endl;
+    cin>>i;
+    return i;
+}
+int remainder()//控制除法是否有余数
+{
+    int i;
+    cout <<"除法有余数请按1,没有请按2"<<endl;
+    cin>>i;
+    return i;
+}
+int gongyue(int a,int b)//找出分子分母的公约数
+{
+    int min,max;
+    max=a>b?a:b;
+    min=a<b?a:b;
+    if(max%min==0)
+        return min;
+    else 
+        return gongyue(min,max%min);
+}
+
+void main()
+{
+    srand((unsigned)time(NULL));
+    int n;
+    n=number();//控制输出题目的数量
+    int parenthese;//控制式子中是否有括号
+    cout<<"生成的算式中有无括号？有请按1，没有请按2"<<endl;
+    cin>>parenthese;
+    if(parenthese==1)//有括号
+    {
+        int i;
+            srand((unsigned)time(NULL));
+            int j;
+            if(n%2==0)
+                j=n/2;//前面一半生成整数的题目
+            else
+                j=n/2+1;//后面一半生成分数的题目
+            for(i=0;i<j;i++)//加减法的带括号整数题目，无负号
+                {
+                     int num1;
+                     num1=rand()%100+1;
+                        cout<<num1;
+                     int sign;
+                     sign=rand()%2+1;
+                     if(sign==1)
+                         cout<<"*(";
+                     if(sign==2)
+                         cout<<"÷(";
+                     int num2;
+                     num2=rand()%100+1;
+                        cout<<num2;
+                        sign=rand()%2+1;
+                     if(sign==1)
+                         cout<<"+";
+                     if(sign==2)
+                         cout<<"-";
+                     int num3;
+                      num3=rand()%100+1;
+                      cout<<num3<<")";
+                      sign=rand()%4+1;
+                      if(sign==1)
+                         cout<<"*";
+                     if(sign==2)
+                         cout<<"÷";
+                     if(sign==3)
+                         cout<<"+";
+                     if(sign==4)
+                         cout<<"-";
+
+                       int num4;
+                      num4=rand()%100+1;
+                     cout<<num4<<"="<<endl;
+                  }
+            for(i=0;i<n-j;i++)//加减法的带括号分数题目，无负号
+                 {
+                    int fz;
+                    int fm;
+                     fz=rand()%100+1;
+                     fm=rand()%100+1;
+                     int a;
+                     a=gongyue(fz,fm);
+                     fz=fz/a;
+                     fm=fm/a;
+                     cout<<fz<<"/"<<fm;
+                     int sign;
+                     sign=rand()%2+1;
+                     if(sign==1)
+                         cout<<"*(";
+                     if(sign==2)
+                         cout<<"-(";
+                     fz=rand()%100+1;
+                     fm=rand()%100+1;
+                     a=gongyue(fz,fm);
+                     fz=fz/a;
+                     fm=fm/a;
+                     cout<<fz<<"/"<<fm;
+                     sign=rand()%2+1;
+                     if(sign==1)
+                         cout<<"+";
+                     if(sign==2)
+                         cout<<"-";
+                     fz=rand()%100+1;
+                     fm=rand()%100+1;
+                     a=gongyue(fz,fm);
+                     fz=fz/a;
+                     fm=fm/a;
+                     cout<<fz<<"/"<<fm<<")";
+                     sign=rand()%4+1;
+                      if(sign==1)
+                         cout<<"*";
+                     if(sign==2)
+                         cout<<"÷";
+                     if(sign==3)
+                         cout<<"+";
+                     if(sign==4)
+                         cout<<"-";
+                      fz=rand()%100+1;
+                     fm=rand()%100+1;
+                     a=gongyue(fz,fm);
+                     fz=fz/a;
+                     fm=fm/a;
+                     cout<<fz<<"/"<<fm<<"="<<endl;
+            }
+    }
+    if(parenthese==2)//没有括号
+    {
+        int a;
+        a=multiplydivide();
+        int re;
+        re=remainder();
+        if(a==1)//有乘除法且除法有余数
+        {
+               int b;
+               b=minus();
+        if(b==1)//有负号的加减法
+        {
+            int i;
+            srand((unsigned)time(NULL));
+            for(i=0;i<n;i++)//
+                {
+                     int num,num1,num2;
+                     int minus;
+                    num1=rand()%100+1; 
+                     minus=rand()%2+1;
+                     if(minus==1)
+                       {
+                            num=(-1)*rand()%100+1;
+                            if(num!=0)
+                                cout<<"("<<num<<")="<<endl;
+                            else
+                                cout<<num<<"="<<endl;
+                        }
+                        if(minus==2)
+                            {
+                                num=rand()%100+1;
+                                cout<<num<<"="<<endl;
+                             }
+                        int suiji;
+                        suiji=rand()%5+1;
+                        int re=remainder();
+                        if(re==1)//有加减乘除且除法有余数
+                            num2=num*suiji+1;
+                        if(re==1)//有加减乘除且除法无余数
+                            num2=num*suiji;
+                        int sign;
+                         sign=rand()%4+1;
+                        if(sign==1)
+                            cout<<num1<<"+"<<num<<"="<<endl;
+                        if(sign==2)
+                           cout<<num1<<"-"<<num<<"="<<endl;
+                        if(sign==3)
+                           cout<<num<<"*"<<num1<<"="<<endl;
+                       if(sign==4)
+                         cout<<num2<<"÷"<<num<<"="<<endl;
+                  
+            
+            }
+                 
+        
+        }
+         
+        }
+    
+        if(a==2)//没有乘除法，只有加减法
+        {
+        int b;
+        b=minus();
+        if(b==1)//有负号的加减法
+        {
+            int i;
+            srand((unsigned)time(NULL));
+            int j;
+            if(n%2==0)
+                j=n/2;//前面一半生成整数的题目
+            else
+                j=n/2+1;//后面一半生成分数的题目
+            for(i=0;i<j;i++)//加减法的整数题目，有负号
+                {
+                     int num;
+                     int minus;
+                     minus=num=rand()%2+1;
+                     if(minus==1)
+                       {
+                            num=(-1)*rand()%100+1;
+                            if(num!=0)
+                                cout<<"("<<num<<")";
+                            else
+                                cout<<num;
+                        }
+                        if(minus==2)
+                            {
+                                num=rand()%100+1;
+                                cout<<num;
+                             }
+                     int sign;
+                     sign=rand()%2+1;
+                     if(sign==1)
+                         cout<<"+";
+                     if(sign==2)
+                         cout<<"-";
+                    minus=num=rand()%2+1;
+                     if(minus==1)
+                       {
+                            num=(-1)*rand()%100+1;
+                            if(num!=0)
+                                cout<<"("<<num<<")="<<endl;
+                            else
+                                cout<<num<<"="<<endl;
+                        }
+                        if(minus==2)
+                            {
+                                num=rand()%100+1;
+                                cout<<num<<"="<<endl;
+                             }
+                  }
+            for(i=0;i<n-j;i++)//加减法的分数题目，有负号
+                 {
+                    int fz;
+                    int fm;
+                    int minus;
+                     minus=rand()%2+1;
+                     fz=rand()%100+1;
+                     fm=rand()%100+1;
+                     int a;
+                     a=gongyue(fz,fm);
+                     fz=fz/a;
+                     fm=fm/a;
+                     if(minus==1)
+                        {
+                            fz=(-1)*fz;
+                            if(fz!=0)
+                                cout<<"("<<fz<<"/"<<fm<<")";
+                            else
+                                cout<<fz<<"/"<<fm;
+                         }
+                    if(minus==2)
+                        {
+                                cout<<fz<<"/"<<fm;
+                         }
+                     int sign;
+                     sign=rand()%2+1;
+                     if(sign==1)
+                         cout<<"+";
+                     if(sign==2)
+                         cout<<"-";
+                     fz=rand()%100+1;
+                     fm=rand()%100+1;
+                     a=gongyue(fz,fm);
+                     fz=fz/a;
+                     fm=fm/a;
+                     cout<<fz<<"/"<<fm<<"="<<endl;
+            }
+                 
+            
+
+        }
+        if(b==2)//没有负号
+        {
+            int i;
+            srand((unsigned)time(NULL));
+            int j;
+            if(n%2==0)
+                j=n/2;//前面一半生成整数的题目
+            else
+                j=n/2+1;//后面一半生成分数的题目
+            for(i=0;i<j;i++)//加减法的整数题目，无负号
+                {
+                     int num;
+                     num=rand()%100+1;
+                        cout<<num;
+                     int sign;
+                     sign=rand()%2+1;
+                     if(sign==1)
+                         cout<<"+";
+                     if(sign==2)
+                         cout<<"-";
+                     num=rand()%100+1;
+                     cout<<num<<"="<<endl;
+                  }
+            for(i=0;i<n-j;i++)//加减法的分数题目，无负号
+                 {
+                    int fz;
+                    int fm;
+                     fz=rand()%100+1;
+                     fm=rand()%100+1;
+                     int a;
+                     a=gongyue(fz,fm);
+                     fz=fz/a;
+                     fm=fm/a;
+                     cout<<fz<<"/"<<fm;
+                     int sign;
+                     sign=rand()%2+1;
+                     if(sign==1)
+                         cout<<"+";
+                     if(sign==2)
+                         cout<<"-";
+                     fz=rand()%100+1;
+                     fm=rand()%100+1;
+                     a=gongyue(fz,fm);
+                     fz=fz/a;
+                     fm=fm/a;
+                     cout<<fz<<"/"<<fm<<"="<<endl;
+            }
+        }
+        }
+    }
+    
+
+
+
+
+    }
