@@ -1,0 +1,4 @@
+[java] view plain copy print?
+Intent intent = new Intent(); //调用照相机      
+intent.setAction("android.media.action.STILL_IMAGE_CAMERA");      
+startActivity(intent);      
